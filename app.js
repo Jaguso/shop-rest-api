@@ -13,7 +13,7 @@ mongoose.connect(
     process.env.MONGO_ATLAS_PW + 
     '@shop-shard-00-00-k8aba.mongodb.net:27017,shop-shard-00-01-k8aba.mongodb.net:27017,shop-shard-00-02-k8aba.mongodb.net:27017/test?ssl=true&replicaSet=shop-shard-0&authSource=admin&retryWrites=true',
     {
-        useMongoClient: true
+        useNewUrlParser: true
     }
 );
 
