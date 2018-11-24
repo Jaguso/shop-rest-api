@@ -16,6 +16,7 @@ mongoose.connect(
         useNewUrlParser: true
     }
 );
+mongoose.Promise = global.Promise;
 
 
 app.use(morgan('dev'));
