@@ -6,9 +6,11 @@ const Order = require('../models/order');
 const Product = require('../models/product');
 
 //obs: los get si llevan exec y los post no
+//.populate es para indicar que datos queremos que responda el servidor
 router.get('/', (req, res, next) => {
     Order.find()
         .select('product quantity _id')
+        .populate('product', 'name')
         .exec()
         .then(docs => {
             res.status(200).json({
@@ -76,6 +78,7 @@ router.post('/', (req, res, next) => {
 
 router.get('/:orderId', (req, res, next) => {
     Order.findById(req.params.orderId)
+        .populate('product')
         .exec()
         .then(order => {
             if (!order) {
