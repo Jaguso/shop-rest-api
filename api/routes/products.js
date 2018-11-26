@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 
-const Product = require('../models/products');
+const Product = require('../models/product');
 
 //.select() es para seleccionar que campos quiere que se creen
 router.get('/', (req, res, next) => {
@@ -58,13 +58,13 @@ router.post('/', (req, res, next) => {
                     }
                 }
             });
-    })
-    .catch(err => {
-        console.log(err);
-        res.status(500).json({
-            error: err
         })
-    });
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            })
+        });
 
 });
 
