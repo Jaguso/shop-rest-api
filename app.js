@@ -20,6 +20,7 @@ mongoose.Promise = global.Promise;
 
 
 app.use(morgan('dev'));
+app.use(express.static('uploads'));
 app.use(bodyParser.urlencoded({extended: false})); //para parsear otras cosas (si ponemos true, se extiende a cosas que no necesitamos ahora)
 app.use(bodyParser.json()); //es para parsear json
 
