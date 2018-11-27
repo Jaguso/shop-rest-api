@@ -12,7 +12,22 @@ const storage = multer.diskStorage({
     }
 });
 
-const upload = multer({storage: storage});
+const fileFilter = (req, file, cb) => {
+    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+        cb(null, true); // this will store the file
+    } else {
+        cb(null, false); // this will reject a file
+    }
+   
+};
+
+const upload = multer({
+    storage: storage , 
+    limits: {
+        fileSize: 1024 * 1024 * 5
+    },
+    fileFilter: fileFilter
+});
 
 
 const Product = require('../models/product');
