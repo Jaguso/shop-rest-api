@@ -20,7 +20,7 @@ mongoose.Promise = global.Promise;
 
 
 app.use(morgan('dev'));
-app.use(express.static('uploads'));
+app.use('/uploads', express.static('uploads')); //this makes the uploads folder available to everyone
 app.use(bodyParser.urlencoded({extended: false})); //para parsear otras cosas (si ponemos true, se extiende a cosas que no necesitamos ahora)
 app.use(bodyParser.json()); //es para parsear json
 
