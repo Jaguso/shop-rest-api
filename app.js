@@ -5,7 +5,9 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 const productRoutes = require('./api/routes/products');
-const orderRoutes = require('./api/routes/orders')
+const orderRoutes = require('./api/routes/orders');
+const userRoutes = require('./api/routes/user');
+
 
 //dentro de connect copiamos de lo mongodb...
 mongoose.connect(
@@ -44,6 +46,8 @@ app.use((req, res, next) => {
 
 app.use('/products', productRoutes);
 app.use('/orders', orderRoutes);
+app.use('/user', userRoutes);
+
 
 app.use((req, res, next) => {
     const error = new Error('Not found');
