@@ -1,13 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const checkAuth = require('../middleware/check-auth');
 
 const Order = require('../models/order');
 const Product = require('../models/product');
 
 //obs: los get si llevan exec y los post no
 //.populate es para indicar que datos queremos que responda el servidor
-router.get('/', (req, res, next) => {
+router.get('/', checkAuth, (req, res, next) => {
     Order.find()
         .select('product quantity _id')
         .populate('product', 'name')
@@ -36,7 +37,7 @@ router.get('/', (req, res, next) => {
         });
 });
 
-router.post('/', (req, res, next) => {
+router.post('/', checkAuth, (req, res, next) => {
 //antes de crear la orden, hacemos lo siguiente, ie
 //verificar que el id del producto que queremos pedir en la orden sí existe
     Product.findById(req.body.productId)
@@ -76,7 +77,7 @@ router.post('/', (req, res, next) => {
         });
 });
 
-router.get('/:orderId', (req, res, next) => {
+router.get('/:orderId', checkAuth, (req, res, next) => {
     Order.findById(req.params.orderId)
         .populate('product')
         .exec()
@@ -101,7 +102,7 @@ router.get('/:orderId', (req, res, next) => {
         });
 });
 
-router.delete('/:orderId', (req, res, next) => {
+router.delete('/:orderId', checkAuth, (req, res, next) => {
     Order.remove({_id: req.params.orderId})
         .exec()
         .then(
